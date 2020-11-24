@@ -3,6 +3,8 @@ using SolidWorks.Interop.swconst;
 using System;
 using System.Windows.Forms;
 using WindowsFormsApp1.Pekok;
+using WindowsFormsApp1.Pekok.Figure;
+using WindowsFormsApp1.Pekok.Maths;
 using WindowsFormsApp1.Pekok.Primitive;
 
 namespace WindowsFormsApp1
@@ -22,11 +24,12 @@ namespace WindowsFormsApp1
             Pekok.SolidWorks.OpenApp();
             clearDataGrids();
             changeDataGridsSize();
+            updateInfoPentagons();
         }
 
         private void clearDataGrids()
         {
-            
+
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
                 for (int j = 0; j < dataGridView1.Rows.Count; j++)
@@ -45,17 +48,17 @@ namespace WindowsFormsApp1
         }
         private void changeDataGridsSize()
         {
-           
+
 
             dataGridView1.ColumnCount = 4;
-            dataGridView1.RowCount = int.Parse(numericUpDown1.Value.ToString())* int.Parse(numericUpDown2.Value.ToString());
+            dataGridView1.RowCount = int.Parse(numericUpDown1.Value.ToString()) * int.Parse(numericUpDown2.Value.ToString());
             dataGridView1.Columns[0].HeaderCell.Value = "Номер точки";
             dataGridView1.Columns[1].HeaderCell.Value = "X";
             dataGridView1.Columns[2].HeaderCell.Value = "Y";
             dataGridView1.Columns[3].HeaderCell.Value = "Z";
 
 
-           
+
             dataGridView2.ColumnCount = 4;
             dataGridView2.RowCount = int.Parse(numericUpDown1.Value.ToString()) * int.Parse(numericUpDown2.Value.ToString());
             dataGridView2.Columns[0].HeaderCell.Value = "Номер точки";
@@ -131,10 +134,10 @@ namespace WindowsFormsApp1
                 {
                     isCreatedCub = true;
                 }
-                Pekok.SolidWorks.swDoc.ClearSelection();             
+                Pekok.SolidWorks.swDoc.ClearSelection();
             }
         }
-        private void drawPentagon(PointD center, PointD vertex, double height,int ii)
+        private void drawPentagon(PointD center, PointD vertex, double height, int ii)
         {
             Pekok.SolidWorks.swDoc.Extension.SelectByID2(TOP, "PLANE", 0, 0, 0, false, 0, null, 0);
 
@@ -158,21 +161,21 @@ namespace WindowsFormsApp1
             Pekok.SolidWorks.swDoc.ClearSelection();
         }
 
-        private void setInfoToDataGrid(int nymber,PointD center, PointD vertex, double g)
+        private void setInfoToDataGrid(int nymber, PointD center, PointD vertex, double g)
         {
-            dataGridView1[0, nymber-1].Value = nymber;
-            dataGridView1[1, nymber - 1].Value = center.X;
-            dataGridView1[2, nymber - 1].Value = center.Y;
-            dataGridView1[3, nymber - 1].Value = center.Z;
+            dataGridView1[0, nymber - 1].Value = nymber;
+            dataGridView1[1, nymber - 1].Value = center.X * 100;
+            dataGridView1[2, nymber - 1].Value = center.Y * 100;
+            dataGridView1[3, nymber - 1].Value = center.Z * 100;
 
 
 
             dataGridView2[0, nymber - 1].Value = nymber;
-            dataGridView2[1, nymber - 1].Value = 0;
-            dataGridView2[2, nymber - 1].Value =g;
-            dataGridView2[3, nymber - 1].Value = 0;
-
+            dataGridView2[1, nymber - 1].Value = Geometry.getDistanceBetweenTwoPoints(center, vertex) * 100;
+            dataGridView2[2, nymber - 1].Value = g * 100;
+            dataGridView2[3, nymber - 1].Value = Geometry.getRotationAngleRelativeToY(center, vertex);
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -206,7 +209,7 @@ namespace WindowsFormsApp1
 
                 double angleA2 = (Math.Atan((width / 2) / (addX + (length - addX) / 2)) * 180 / Math.PI),
                     angleA1 = angle - angleA2,
-                    AO =Math.Pow(150-0,2)+ Math.Pow(50-0,2);
+                    AO = Math.Pow(150 - 0, 2) + Math.Pow(50 - 0, 2);
                 AO = Math.Pow(AO, 0.5);
 
 
@@ -222,7 +225,7 @@ namespace WindowsFormsApp1
                 //    , "");
 
 
-              //  double KC = addX / countX;
+                //  double KC = addX / countX;
 
                 double KC = 0;
 
@@ -237,20 +240,20 @@ namespace WindowsFormsApp1
                         KC = (width / countY) / Math.Tan(angle * Math.PI / 180);
 
                         center.Y = y * kekY + kekY / 2;
-                        center.X = x * kekX + (kekX - KC) / 2 +(y+1)*KC;
+                        center.X = x * kekX + (kekX - KC) / 2 + (y + 1) * KC;
 
-                        double AOO= Math.Pow(center.X - x * kekX, 2) + Math.Pow(center.Y - y * kekY, 2);
+                        double AOO = Math.Pow(center.X - x * kekX, 2) + Math.Pow(center.Y - y * kekY, 2);
 
 
                         AOO = Math.Pow(AOO, 0.5);
 
                         double MO = (AOO * Math.Sin(angleA1 * Math.PI / 180));
 
-                         
+
                         vertex.X = center.X;
 
                         double lg = kekX > kekY ? kekY : kekX;
-                        if (MO> lg / 2)
+                        if (MO > lg / 2)
                         {
                             vertex.Y = center.Y + lg / 2 - 0.01;
                         }
@@ -260,11 +263,11 @@ namespace WindowsFormsApp1
                         }
 
                         drawPentagon(center, vertex, height, ii);
-                        setInfoToDataGrid(ii,center,vertex, height);
+                        setInfoToDataGrid(ii, center, vertex, height);
                         ii++;
                     }
                 }
-                
+
                 //for (int i = 0; i < countY; i++)
                 //{
                 //    for(int j = 0; j < countX; j++)
@@ -316,14 +319,154 @@ namespace WindowsFormsApp1
             //Pekok.SolidWorks.swDoc.ClearSelection();
         }
 
+        private void updateInfoPentagons()
+        {
+            int angle;
+            double height, width, length;
+            int.TryParse(numericUpDown6.Value.ToString(), out angle);
+
+            double.TryParse(numericUpDown3.Value.ToString(), out height);
+
+            double.TryParse(numericUpDown4.Value.ToString(), out width);
+            double.TryParse(numericUpDown5.Value.ToString(), out length);
+
+            int countX, countY;
+
+            int.TryParse(numericUpDown1.Value.ToString(), out countX);
+            int.TryParse(numericUpDown2.Value.ToString(), out countY);
+
+            height /= 100;
+
+            width /= 100;
+            length /= 100;
+
+            double kekX = length / countX, kekY = width / countY,
+                addX = width / Math.Tan(angle * Math.PI / 180);
+
+
+            PointD center = new PointD(), vertex = new PointD();
+            int ii = 1;
+
+            double angleA2 = (Math.Atan((width / 2) / (addX + (length - addX) / 2)) * 180 / Math.PI),
+                angleA1 = angle - angleA2;
+
+            for (int y = 0; y < countY; y++)
+            {
+                for (int x = 0; x < countX; x++)
+                {
+
+                    double KC = (width / countY) / Math.Tan(angle * Math.PI / 180);
+
+                    center.Y = y * kekY + kekY / 2;
+                    center.X = x * kekX + (kekX - KC) / 2 + (y + 1) * KC;
+
+                    double AOO = Math.Pow(center.X - x * kekX, 2) + Math.Pow(center.Y - y * kekY, 2);
+
+
+                    AOO = Math.Pow(AOO, 0.5);
+
+                    double MO = (AOO * Math.Sin(angleA1 * Math.PI / 180));
+
+
+                    vertex.X = center.X;
+
+                    double lg = kekX > kekY ? kekY : kekX;
+                    if (MO > lg / 2)
+                    {
+                        vertex.Y = center.Y + lg / 2 - 0.01;
+                    }
+                    else
+                    {
+                        vertex.Y = center.Y + MO - 0.01;
+                    }
+                    setInfoToDataGrid(ii, center, vertex, height);
+                    ii++;
+                }
+            }
+        }
+        private void drawPentagons()
+        {
+
+        }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             changeDataGridsSize();
+            updateInfoPentagons();
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             changeDataGridsSize();
+            updateInfoPentagons();
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            updateInfoPentagons();
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            updateInfoPentagons();
+        }
+
+        private void numericUpDown5_ValueChanged(object sender, EventArgs e)
+        {
+            updateInfoPentagons();
+        }
+
+        private void numericUpDown6_ValueChanged(object sender, EventArgs e)
+        {
+            updateInfoPentagons();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+
+            int countX, countY;
+
+            int.TryParse(numericUpDown1.Value.ToString(), out countX);
+            int.TryParse(numericUpDown2.Value.ToString(), out countY);
+
+            int ii = 1;
+
+
+            PointD center = new PointD(), vertex = new PointD();
+
+            for (int y = 0; y < countY; y++)
+            {
+                for (int x = 0; x < countX; x++)
+                {
+                    center.X = double.Parse(dataGridView1[1, ii - 1].Value.ToString()) / 100;
+                    center.Y = double.Parse(dataGridView1[2, ii - 1].Value.ToString()) / 100;
+                    center.Z = double.Parse(dataGridView1[3, ii - 1].Value.ToString()) / 100;
+                    
+
+                    vertex.Z = center.Z;
+
+
+                    int angle = int.Parse(dataGridView2[3, ii - 1].Value.ToString());
+                    double radius = double.Parse(dataGridView2[1, ii - 1].Value.ToString());
+
+
+
+
+                    vertex.X = center.X + (radius * Math.Sin(angle * 180 / Math.PI)) / 100; ;
+                    vertex.Y = center.Y + (radius * Math.Cos(angle * 180 / Math.PI)) / 100; ;
+
+
+                    //центрольный угол равен =72, знч нужно поворачиватся от 0 до 72
+                    //MessageBox.Show("X=" + center.X + " Y=" + center.Y + " Z=" + center.Z, "1");
+                    //MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
+                    
+                    drawPentagon(center, vertex, double.Parse(dataGridView2[2, ii - 1].Value.ToString()) / 100, ii);
+
+
+                    setInfoToDataGrid(ii, center, vertex, double.Parse(dataGridView2[2, ii - 1].Value.ToString()) / 100);
+                    ii++;
+                }
+            }
         }
     }
 }
