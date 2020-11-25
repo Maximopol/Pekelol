@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Pekok\Figure\Parallelepiped.cs" />
     <Compile Include="Pekok\Figure\Pentagon.cs" />
+    <Compile Include="Pekok\Information.cs" />
     <Compile Include="Pekok\Maths\Geometry.cs" />
     <Compile Include="Pekok\Primitive\Line.cs" />
     <Compile Include="Pekok\Primitive\PointD.cs" />

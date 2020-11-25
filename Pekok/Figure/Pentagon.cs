@@ -10,6 +10,9 @@ namespace WindowsFormsApp1.Pekok.Figure
         public const int COUNT = 5;
         public object[] sketch;
 
+        private double radius;
+        private double angleRotate;
+
         public Pentagon()
         {
             vertex = new PointD();

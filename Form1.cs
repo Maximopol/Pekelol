@@ -69,28 +69,6 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             drawParallepiped();
-
-
-            //Pekok.SolidWorks.swDoc.Extension.SelectByID2(TOP, "PLANE", 0, 0, 0, false, 0, null, 0);
-
-            //Pekok.SolidWorks.swDoc.SketchManager.InsertSketch(false);
-
-            //object[] sss = Pekok.SolidWorks.swDoc.SketchManager.CreatePolygon(0, 0, 0, 1, 1, 0, 5, true);
-
-            //foreach (object b in sss)
-            //{
-            //    ((SketchSegment)b).Select(true);
-            //}
-
-            //Pekok.SolidWorks.swDoc.SketchManager.InsertSketch(true);
-
-            //Pekok.SolidWorks.swDoc.Extension.SelectByID2("Sketch1", "SKETCH", 0, 0, 0, false, 0, null, 0);
-            //Pekok.SolidWorks.swDoc.ClearSelection2(true);
-            //Pekok.SolidWorks.swDoc.Extension.SelectByID2("Sketch1", "SKETCH", 0, 0, 0, false, 4, null, 0);
-
-            //Feature g = Puller.Cut(Pekok.SolidWorks.swDoc, 1);
-
-            //Pekok.SolidWorks.swDoc.ClearSelection();
         }
 
         private void toolStripButtonAbout_Click(object sender, EventArgs e)
@@ -143,7 +121,7 @@ namespace WindowsFormsApp1
 
             Pekok.SolidWorks.swDoc.SketchManager.InsertSketch(false);
 
-            object[] sss = Pekok.SolidWorks.swDoc.SketchManager.CreatePolygon(center.X, center.Y, 0, vertex.X, vertex.Y, 0, 5, true);
+            object[] sss = Pekok.SolidWorks.swDoc.SketchManager.CreatePolygon(center.X, center.Y, center.Z, vertex.X, vertex.Y, vertex.Z, 5, true);
 
             foreach (object b in sss)
             {
@@ -422,7 +400,7 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            drawParallepiped();
 
             int countX, countY;
 
@@ -446,19 +424,19 @@ namespace WindowsFormsApp1
                     vertex.Z = center.Z;
 
 
-                    int angle = int.Parse(dataGridView2[3, ii - 1].Value.ToString());
+                    double angle = double.Parse(dataGridView2[3, ii - 1].Value.ToString());
                     double radius = double.Parse(dataGridView2[1, ii - 1].Value.ToString());
 
 
 
 
-                    vertex.X = center.X + (radius * Math.Sin(angle * 180 / Math.PI)) / 100; ;
-                    vertex.Y = center.Y + (radius * Math.Cos(angle * 180 / Math.PI)) / 100; ;
+                    vertex.Y = center.Y + (radius * Math.Sin((90-angle) * 180 / Math.PI)) / 100; ;
+                    vertex.X = center.X + (radius * Math.Cos((90 - angle) * 180 / Math.PI)) / 100; ;
 
 
                     //центрольный угол равен =72, знч нужно поворачиватся от 0 до 72
                     //MessageBox.Show("X=" + center.X + " Y=" + center.Y + " Z=" + center.Z, "1");
-                    //MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
+                   // MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
                     
                     drawPentagon(center, vertex, double.Parse(dataGridView2[2, ii - 1].Value.ToString()) / 100, ii);
 
