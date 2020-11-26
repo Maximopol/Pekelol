@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
             clearDataGrids();
             changeDataGridsSize();
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void clearDataGrids()
@@ -62,9 +63,9 @@ namespace WindowsFormsApp1
             dataGridView2.ColumnCount = 4;
             dataGridView2.RowCount = int.Parse(numericUpDown1.Value.ToString()) * int.Parse(numericUpDown2.Value.ToString());
             dataGridView2.Columns[0].HeaderCell.Value = "Номер точки";
-            dataGridView2.Columns[1].HeaderCell.Value = "Радиус";
-            dataGridView2.Columns[2].HeaderCell.Value = "Глубина";
-            dataGridView2.Columns[3].HeaderCell.Value = "Угол поворота относительно Y";
+            dataGridView2.Columns[Information.RADIUS_COLUMN].HeaderCell.Value = "Радиус";
+            dataGridView2.Columns[Information.DEPTH_COLUMN].HeaderCell.Value = "Глубина";
+            dataGridView2.Columns[Information.ROTATION_COLUMN].HeaderCell.Value = "Угол поворота относительно Y";
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -149,9 +150,9 @@ namespace WindowsFormsApp1
 
 
             dataGridView2[0, nymber - 1].Value = nymber;
-            dataGridView2[1, nymber - 1].Value = Geometry.getDistanceBetweenTwoPoints(center, vertex) * 100;
-            dataGridView2[2, nymber - 1].Value = g * 100;
-            dataGridView2[3, nymber - 1].Value = Geometry.getRotationAngleRelativeToY(center, vertex);
+            dataGridView2[Information.RADIUS_COLUMN, nymber - 1].Value = Geometry.getDistanceBetweenTwoPoints(center, vertex) * 100;
+            dataGridView2[Information.DEPTH_COLUMN, nymber - 1].Value = g * 100;
+            dataGridView2[Information.ROTATION_COLUMN, nymber - 1].Value = Geometry.getRotationAngleRelativeToY(center, vertex);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -370,12 +371,14 @@ namespace WindowsFormsApp1
         {
             changeDataGridsSize();
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             changeDataGridsSize();
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
@@ -424,8 +427,8 @@ namespace WindowsFormsApp1
                     vertex.Z = center.Z;
 
 
-                    double angle = double.Parse(dataGridView2[3, ii - 1].Value.ToString());
-                    double radius = double.Parse(dataGridView2[1, ii - 1].Value.ToString());
+                    double angle = double.Parse(dataGridView2[Information.ROTATION_COLUMN, ii - 1].Value.ToString());
+                    double radius = double.Parse(dataGridView2[Information.RADIUS_COLUMN, ii - 1].Value.ToString());
 
 
 
@@ -438,13 +441,89 @@ namespace WindowsFormsApp1
                     //MessageBox.Show("X=" + center.X + " Y=" + center.Y + " Z=" + center.Z, "1");
                    // MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
                     
-                    drawPentagon(center, vertex, double.Parse(dataGridView2[2, ii - 1].Value.ToString()) / 100, ii);
+                    drawPentagon(center, vertex, double.Parse(dataGridView2[Information.DEPTH_COLUMN, ii - 1].Value.ToString()) / 100, ii);
 
 
-                    setInfoToDataGrid(ii, center, vertex, double.Parse(dataGridView2[2, ii - 1].Value.ToString()) / 100);
+                    setInfoToDataGrid(ii, center, vertex, double.Parse(dataGridView2[Information.DEPTH_COLUMN, ii - 1].Value.ToString()) / 100);
                     ii++;
                 }
             }
+        }
+
+        private void numericUpDown7_ValueChanged(object sender, EventArgs e)
+        {
+            int countX, countY;
+
+            int.TryParse(numericUpDown1.Value.ToString(), out countX);
+            int.TryParse(numericUpDown2.Value.ToString(), out countY);
+
+            double radius = double.Parse(numericUpDown7.Value.ToString());
+            int ii = 1;
+
+            for (int y = 0; y < countY; y++)
+            {
+                for (int x = 0; x < countX; x++)
+                {
+                    dataGridView2[Information.RADIUS_COLUMN, ii - 1].Value = radius;
+                    ii++;
+                }
+            }
+        }
+
+        private void numericUpDown8_ValueChanged(object sender, EventArgs e)
+        {
+            int countX, countY;
+
+            int.TryParse(numericUpDown1.Value.ToString(), out countX);
+            int.TryParse(numericUpDown2.Value.ToString(), out countY);
+
+            double depth = double.Parse(numericUpDown8.Value.ToString());
+            int ii = 1;
+
+            for (int y = 0; y < countY; y++)
+            {
+                for (int x = 0; x < countX; x++)
+                {
+                    dataGridView2[Information.DEPTH_COLUMN, ii - 1].Value = depth;
+                    ii++;
+                }
+            }
+        }
+
+        private void numericUpDown9_ValueChanged(object sender, EventArgs e)
+        {
+            int countX, countY;
+
+            int.TryParse(numericUpDown1.Value.ToString(), out countX);
+            int.TryParse(numericUpDown2.Value.ToString(), out countY);
+
+            double rotate = double.Parse(numericUpDown9.Value.ToString());
+            int ii = 1;
+
+            for (int y = 0; y < countY; y++)
+            {
+                for (int x = 0; x < countX; x++)
+                {                  
+                    dataGridView2[Information.ROTATION_COLUMN, ii - 1].Value = rotate;
+                    ii++;
+                }
+            }
+        }
+
+        private void numericUpDown11_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown10_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void initNumericUpDown()
+        {
+            numericUpDown7.Value = decimal.Parse(dataGridView2[Information.RADIUS_COLUMN,0].Value.ToString());
+            numericUpDown8.Value = decimal.Parse(dataGridView2[Information.DEPTH_COLUMN, 0].Value.ToString());
+            numericUpDown9.Value = decimal.Parse(dataGridView2[Information.ROTATION_COLUMN, 0].Value.ToString());
         }
     }
 }

@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.Pekok
 {
-    public class Information
+    public static class Information
     {
+        public const int RADIUS_COLUMN = 1;
+
+        public const int DEPTH_COLUMN = 2;
+
+        public const int ROTATION_COLUMN = 3;
+
+
+
     }
 }
