@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
             changeDataGridsSize();
             updateInfoPentagons();
             initNumericUpDown();
+            initSmallDataGrid();
         }
 
         private void clearDataGrids()
@@ -372,6 +373,7 @@ namespace WindowsFormsApp1
             changeDataGridsSize();
             updateInfoPentagons();
             initNumericUpDown();
+            changeSizeSmallDataGrid();
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
@@ -379,26 +381,31 @@ namespace WindowsFormsApp1
             changeDataGridsSize();
             updateInfoPentagons();
             initNumericUpDown();
+            changeSizeSmallDataGrid();
         }
 
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
         {
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void numericUpDown5_ValueChanged(object sender, EventArgs e)
         {
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void numericUpDown6_ValueChanged(object sender, EventArgs e)
         {
             updateInfoPentagons();
+            initNumericUpDown();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -422,7 +429,7 @@ namespace WindowsFormsApp1
                     center.X = double.Parse(dataGridView1[1, ii - 1].Value.ToString()) / 100;
                     center.Y = double.Parse(dataGridView1[2, ii - 1].Value.ToString()) / 100;
                     center.Z = double.Parse(dataGridView1[3, ii - 1].Value.ToString()) / 100;
-                    
+
 
                     vertex.Z = center.Z;
 
@@ -433,14 +440,14 @@ namespace WindowsFormsApp1
 
 
 
-                    vertex.Y = center.Y + (radius * Math.Sin((90-angle) * 180 / Math.PI)) / 100; ;
+                    vertex.Y = center.Y + (radius * Math.Sin((90 - angle) * 180 / Math.PI)) / 100; ;
                     vertex.X = center.X + (radius * Math.Cos((90 - angle) * 180 / Math.PI)) / 100; ;
 
 
                     //центрольный угол равен =72, знч нужно поворачиватся от 0 до 72
                     //MessageBox.Show("X=" + center.X + " Y=" + center.Y + " Z=" + center.Z, "1");
-                   // MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
-                    
+                    // MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
+
                     drawPentagon(center, vertex, double.Parse(dataGridView2[Information.DEPTH_COLUMN, ii - 1].Value.ToString()) / 100, ii);
 
 
@@ -503,7 +510,7 @@ namespace WindowsFormsApp1
             for (int y = 0; y < countY; y++)
             {
                 for (int x = 0; x < countX; x++)
-                {                  
+                {
                     dataGridView2[Information.ROTATION_COLUMN, ii - 1].Value = rotate;
                     ii++;
                 }
@@ -521,9 +528,83 @@ namespace WindowsFormsApp1
         }
         private void initNumericUpDown()
         {
-            numericUpDown7.Value = decimal.Parse(dataGridView2[Information.RADIUS_COLUMN,0].Value.ToString());
+            numericUpDown7.Value = decimal.Parse(dataGridView2[Information.RADIUS_COLUMN, 0].Value.ToString());
             numericUpDown8.Value = decimal.Parse(dataGridView2[Information.DEPTH_COLUMN, 0].Value.ToString());
             numericUpDown9.Value = decimal.Parse(dataGridView2[Information.ROTATION_COLUMN, 0].Value.ToString());
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int length1 = int.Parse(numericUpDown1.Value.ToString()), length2 = int.Parse(numericUpDown2.Value.ToString());
+            for (int i=0;i<length1 ;i++ )
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    //MessageBox.Show(""+( i + length1 * j + 1), "");
+                    if(dataGridView3[2, i].Value.ToString().Equals("Да"))
+                    {
+                        dataGridView2[Information.RADIUS_COLUMN, i + length1 * j].Value = dataGridView3[1, i].Value;
+                    }
+                                  
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int length1 = int.Parse(numericUpDown1.Value.ToString()), length2 = int.Parse(numericUpDown2.Value.ToString());
+            for (int i = 0; i < length2; i++)
+            {
+                for (int j = 0; j < length1; j++)
+                {
+                    //MessageBox.Show(""+( i + length1 * j + 1), "");
+                    if (dataGridView4[2, i].Value.ToString().Equals("Да"))
+                    {
+                        dataGridView2[Information.RADIUS_COLUMN, j + length1 * i].Value = dataGridView4[1, i].Value;
+                    }
+
+                }
+            }
+        }
+        private void initSmallDataGrid()
+        {
+            dataGridView3.ColumnCount = 3;
+
+            dataGridView3.Columns[0].HeaderCell.Value = "Номер оси";
+            dataGridView3.Columns[1].HeaderCell.Value = "Радиус";
+            dataGridView3.Columns[2].HeaderCell.Value = "Менять?";
+
+
+            dataGridView4.ColumnCount = 3;
+
+            dataGridView4.Columns[0].HeaderCell.Value = "Номер оси";
+            dataGridView4.Columns[1].HeaderCell.Value = "Радиус";
+            dataGridView4.Columns[2].HeaderCell.Value = "Менять?";
+            changeSizeSmallDataGrid();
+        }
+
+        private void changeSizeSmallDataGrid()
+        {
+            int length1 = int.Parse(numericUpDown1.Value.ToString()), length2 = int.Parse(numericUpDown2.Value.ToString());
+            dataGridView3.RowCount = 1 + length1;
+            dataGridView4.RowCount = 1 + length2;
+
+            double radius = double.Parse(numericUpDown7.Value.ToString());
+
+
+            for (int i = 1; i <= length1; i++)
+            {
+                dataGridView3[0, i - 1].Value = i;
+                dataGridView3[1, i - 1].Value = radius;
+                dataGridView3[2, i - 1].Value = "Да";
+            }
+            for (int i = 1; i <= length2; i++)
+            {
+                dataGridView4[0, i - 1].Value = i;
+                dataGridView4[1, i - 1].Value = radius;
+                dataGridView4[2, i - 1].Value = "Да";
+            }
+
         }
     }
 }
