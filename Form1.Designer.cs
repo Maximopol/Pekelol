@@ -61,8 +61,10 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabControl5 = new System.Windows.Forms.TabControl();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
@@ -86,8 +88,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.Изменить = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -533,6 +535,16 @@
             this.tabPage11.Text = "Диаметры по оси X";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(112, 192);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "Изменить";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -552,6 +564,16 @@
             this.tabPage12.TabIndex = 1;
             this.tabPage12.Text = "Диаметры по оси Y";
             this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(112, 192);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "Изменить";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridView4
             // 
@@ -721,6 +743,7 @@
             // 
             // tabPage13
             // 
+            this.tabPage13.Controls.Add(this.Изменить);
             this.tabPage13.Controls.Add(this.dataGridView5);
             this.tabPage13.Location = new System.Drawing.Point(4, 22);
             this.tabPage13.Name = "tabPage13";
@@ -735,11 +758,12 @@
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView5.Location = new System.Drawing.Point(6, 6);
             this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(298, 209);
+            this.dataGridView5.Size = new System.Drawing.Size(298, 180);
             this.dataGridView5.TabIndex = 0;
             // 
             // tabPage14
             // 
+            this.tabPage14.Controls.Add(this.button7);
             this.tabPage14.Controls.Add(this.dataGridView6);
             this.tabPage14.Location = new System.Drawing.Point(4, 22);
             this.tabPage14.Name = "tabPage14";
@@ -754,7 +778,7 @@
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView6.Location = new System.Drawing.Point(6, 6);
             this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(298, 209);
+            this.dataGridView6.Size = new System.Drawing.Size(298, 180);
             this.dataGridView6.TabIndex = 0;
             // 
             // numericUpDown10
@@ -762,11 +786,6 @@
             this.numericUpDown10.Location = new System.Drawing.Point(179, 42);
             this.numericUpDown10.Maximum = new decimal(new int[] {
             1000,
-            0,
-            0,
-            0});
-            this.numericUpDown10.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -785,11 +804,6 @@
             this.numericUpDown11.Location = new System.Drawing.Point(179, 18);
             this.numericUpDown11.Maximum = new decimal(new int[] {
             1000,
-            0,
-            0,
-            0});
-            this.numericUpDown11.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -840,25 +854,25 @@
             this.tabPage6.Text = "Коэффициент уплотнения-разряжения отверстий";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // Изменить
             // 
-            this.button4.Location = new System.Drawing.Point(113, 192);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Изменить";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.Изменить.Location = new System.Drawing.Point(116, 192);
+            this.Изменить.Name = "Изменить";
+            this.Изменить.Size = new System.Drawing.Size(75, 23);
+            this.Изменить.TabIndex = 1;
+            this.Изменить.Text = "Изменить";
+            this.Изменить.UseVisualStyleBackColor = true;
+            this.Изменить.Click += new System.EventHandler(this.Изменить_Click);
             // 
-            // button5
+            // button7
             // 
-            this.button5.Location = new System.Drawing.Point(112, 192);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Изменить";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button7.Location = new System.Drawing.Point(112, 192);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "Изменить";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
@@ -979,6 +993,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button Изменить;
+        private System.Windows.Forms.Button button7;
     }
 }
 
