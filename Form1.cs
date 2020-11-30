@@ -436,13 +436,11 @@ namespace WindowsFormsApp1
 
                     double angle = double.Parse(dataGridView2[Information.ROTATION_COLUMN, ii - 1].Value.ToString());
                     double radius = double.Parse(dataGridView2[Information.RADIUS_COLUMN, ii - 1].Value.ToString());
+                   
 
-
-
-
-                    vertex.Y = center.Y + (radius * Math.Sin((90 - angle) * 180 / Math.PI)) / 100; ;
-                    vertex.X = center.X + (radius * Math.Cos((90 - angle) * 180 / Math.PI)) / 100; ;
-
+                    vertex.Y = center.Y + (radius * Math.Sin((90 - angle) * Math.PI  / 180)) / 100; ;
+                    vertex.X = center.X + (radius * Math.Cos((90 - angle) * Math.PI / 180)) / 100; ;
+                    //vertex = Geometry.setNewPositionByAngleRotateAndRaduis(center, vertex, radius, angle);
 
                     //центрольный угол равен =72, знч нужно поворачиватся от 0 до 72
                     //MessageBox.Show("X=" + center.X + " Y=" + center.Y + " Z=" + center.Z, "1");
@@ -606,5 +604,6 @@ namespace WindowsFormsApp1
             }
 
         }
+        
     }
 }
