@@ -77,19 +77,23 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabControl6 = new System.Windows.Forms.TabControl();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.Изменить = new System.Windows.Forms.Button();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.Изменить = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown13 = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -128,6 +132,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -449,7 +455,6 @@
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
             this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -718,6 +723,11 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.numericUpDown12);
+            this.tabPage7.Controls.Add(this.numericUpDown13);
+            this.tabPage7.Controls.Add(this.label15);
+            this.tabPage7.Controls.Add(this.label16);
+            this.tabPage7.Controls.Add(this.label14);
             this.tabPage7.Controls.Add(this.tabControl6);
             this.tabPage7.Controls.Add(this.numericUpDown10);
             this.tabPage7.Controls.Add(this.numericUpDown11);
@@ -730,6 +740,16 @@
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Общая настройка";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(-1, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(301, 13);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "Коэффициент уплотнения-разряжения отверстий";
             // 
             // tabControl6
             // 
@@ -753,6 +773,16 @@
             this.tabPage13.Text = "По оси X";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // Изменить
+            // 
+            this.Изменить.Location = new System.Drawing.Point(116, 192);
+            this.Изменить.Name = "Изменить";
+            this.Изменить.Size = new System.Drawing.Size(75, 23);
+            this.Изменить.TabIndex = 1;
+            this.Изменить.Text = "Изменить";
+            this.Изменить.UseVisualStyleBackColor = true;
+            this.Изменить.Click += new System.EventHandler(this.Изменить_Click);
+            // 
             // dataGridView5
             // 
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -772,6 +802,16 @@
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "По оси Y";
             this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(112, 192);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "Изменить";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // dataGridView6
             // 
@@ -845,34 +885,49 @@
             this.tabPage8.Text = "Точечная настройка";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // tabPage6
+            // numericUpDown12
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(644, 291);
-            this.tabPage6.TabIndex = 3;
-            this.tabPage6.Text = "Коэффициент уплотнения-разряжения отверстий";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.numericUpDown12.Location = new System.Drawing.Point(179, 128);
+            this.numericUpDown12.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown12.Name = "numericUpDown12";
+            this.numericUpDown12.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDown12.TabIndex = 24;
+            this.numericUpDown12.ValueChanged += new System.EventHandler(this.numericUpDown12_ValueChanged);
             // 
-            // Изменить
+            // numericUpDown13
             // 
-            this.Изменить.Location = new System.Drawing.Point(116, 192);
-            this.Изменить.Name = "Изменить";
-            this.Изменить.Size = new System.Drawing.Size(75, 23);
-            this.Изменить.TabIndex = 1;
-            this.Изменить.Text = "Изменить";
-            this.Изменить.UseVisualStyleBackColor = true;
-            this.Изменить.Click += new System.EventHandler(this.Изменить_Click);
+            this.numericUpDown13.Location = new System.Drawing.Point(179, 104);
+            this.numericUpDown13.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown13.Name = "numericUpDown13";
+            this.numericUpDown13.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDown13.TabIndex = 23;
+            this.numericUpDown13.ValueChanged += new System.EventHandler(this.numericUpDown13_ValueChanged);
             // 
-            // button7
+            // label15
             // 
-            this.button7.Location = new System.Drawing.Point(112, 192);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "Изменить";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 130);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(105, 13);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Коэффициент по Y:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 104);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(105, 13);
+            this.label16.TabIndex = 21;
+            this.label16.Text = "Коэффициент по X:";
             // 
             // Form1
             // 
@@ -883,7 +938,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Pekelol";
+            this.Text = " ";
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -927,6 +982,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -964,7 +1021,6 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage tabPage8;
@@ -995,6 +1051,11 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button Изменить;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown numericUpDown12;
+        private System.Windows.Forms.NumericUpDown numericUpDown13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
 

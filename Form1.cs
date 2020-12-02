@@ -443,11 +443,6 @@ namespace WindowsFormsApp1
 
                     vertex.Y = center.Y + (radius * Math.Sin((90 - angle) * Math.PI / 180)) / 100; ;
                     vertex.X = center.X + (radius * Math.Cos((90 - angle) * Math.PI / 180)) / 100; ;
-                    //vertex = Geometry.setNewPositionByAngleRotateAndRaduis(center, vertex, radius, angle);
-
-                    //центрольный угол равен =72, знч нужно поворачиватся от 0 до 72
-                    //MessageBox.Show("X=" + center.X + " Y=" + center.Y + " Z=" + center.Z, "1");
-                    // MessageBox.Show("X=" + vertex.X + " Y=" + vertex.Y + " Z=" + vertex.Z, "2");
 
                     drawPentagon(center, vertex, double.Parse(dataGridView2[Information.DEPTH_COLUMN, ii - 1].Value.ToString()) / 100, ii);
 
@@ -684,8 +679,8 @@ namespace WindowsFormsApp1
             {
                 for (int j = 1; j < length1; j++)
                 {
-                    MessageBox.Show(dataGridView5[2, i].Value.ToString(), "");
-                    if (dataGridView5[2, i].Value.ToString().Equals("Да"))
+                    //   MessageBox.Show(dataGridView5[2, i].Value.ToString(), "");
+                    if (dataGridView5[2, j - 1].Value.ToString().Equals("Да"))
                     {
                         dataGridView1[1, j + length1 * i].Value = double.Parse(dataGridView1[1, j + length1 * i - 1].Value.ToString()) + double.Parse(dataGridView5[1, j - 1].Value.ToString());
                     }
@@ -707,33 +702,47 @@ namespace WindowsFormsApp1
                     //MessageBox.Show(""+( i + length1 * j + 1), "");
 
 
-                    if (dataGridView6[2, i].Value.ToString().Equals("Да"))
+                    if (dataGridView6[2, j - 1].Value.ToString().Equals("Да"))
                     {
-                        //MessageBox.Show("" + (i + length1 * j + 1), ""+i);
-                        dataGridView1[2, i + length1 * j].Value = double.Parse(dataGridView1[2, j + length1 * (i - 1)].Value.ToString()) + double.Parse(dataGridView6[1, j - 1].Value.ToString());
-                        //dataGridView1[2, j + length1 * i].Value = double.Parse(dataGridView1[2, j + length1 * (i - 1)].Value.ToString()) + double.Parse(dataGridView6[1, j - 1].Value.ToString());
+                       // MessageBox.Show("" + (i + length1 * j + 1), "Pred=" + (i + length1 * (j - 1) + 1));
 
-                        //  dataGridView2[Information.RADIUS_COLUMN, i + length1 * j].Value = dataGridView3[1, i].Value;
+
+                        dataGridView1[2, i + length1 * j].Value = double.Parse(dataGridView1[2, i + length1 * (j - 1)].Value.ToString()) + double.Parse(dataGridView6[1, j - 1].Value.ToString());
+                        //MessageBox.Show("" + (i + length1 * j + 1), ""+i);
+                        //dataGridView1[2, i + length1 * j].Value = double.Parse(dataGridView1[2, j + length1 * (i - 1)].Value.ToString()) + double.Parse(dataGridView6[1, j - 1].Value.ToString());
                     }
 
                 }
             }
+        }
 
-            //int length1 = int.Parse(numericUpDown1.Value.ToString()), length2 = int.Parse(numericUpDown2.Value.ToString());
-
-            //for (int i = 1; i < length1; i++)
-            //{
-            //    for (int j = 0; j < length2; j++)
-            //    {
-
-            //        if (dataGridView6[2, i].Value.ToString().Equals("Да"))
-            //        {
-            //            dataGridView1[2, j + length2 * i].Value = double.Parse(dataGridView1[2, j + length2 * i - 1].Value.ToString()) + double.Parse(dataGridView6[1, j - 1].Value.ToString());
-            //        }
+        private void numericUpDown13_ValueChanged(object sender, EventArgs e)
+        {
+            int length2 = int.Parse(numericUpDown1.Value.ToString());
+            double koef = double.Parse(numericUpDown13.Value.ToString());
 
 
-            //    }
-            //}
+            for (int i = 2; i < length2; i++)
+            {
+                dataGridView5[0, i - 1].Value = i;
+                dataGridView5[1, i - 1].Value = (koef * (i - 1) + 1) * double.Parse(dataGridView5[1, 0].Value.ToString());
+                dataGridView5[2, i - 1].Value = "Да";
+            }
+        }
+
+        private void numericUpDown12_ValueChanged(object sender, EventArgs e)
+        {
+            int length1 = int.Parse(numericUpDown2.Value.ToString());
+            double koef = double.Parse(numericUpDown12.Value.ToString());
+
+
+            for (int i = 2; i < length1; i++)
+            {
+                dataGridView6[0, i - 1].Value = i;
+                dataGridView6[1, i - 1].Value = (koef * (i - 1) + 1) * double.Parse(dataGridView6[1, 0].Value.ToString());
+                dataGridView6[2, i - 1].Value = "Да";
+            }
+
         }
     }
 }
